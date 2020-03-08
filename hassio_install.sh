@@ -132,6 +132,7 @@ fi
 # Read infos from web
 if [ -z "${HASSIO_VERSION}" ]; then
 	HASSIO_VERSION=$(curl -s $URL_VERSION | jq -e -r '.supervisor')
+fi
 
 ##
 # Write configuration
