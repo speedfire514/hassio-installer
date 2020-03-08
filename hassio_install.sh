@@ -48,6 +48,10 @@ while [[ $# -gt 0 ]]; do
             MACHINE=$2
             shift
             ;;
+        -v|--version)
+            HASSIO_VERSION=$2
+            shift
+            ;;
         -d|--data-share)
             DATA_SHARE=$2
             shift
@@ -126,7 +130,8 @@ if [ ! -d "$DATA_SHARE" ]; then
 fi
 
 # Read infos from web
-HASSIO_VERSION=$(curl -s $URL_VERSION | jq -e -r '.supervisor')
+if [ -z "${HASSIO_VERSION}" ]; then
+	HASSIO_VERSION=$(curl -s $URL_VERSION | jq -e -r '.supervisor')
 
 ##
 # Write configuration
